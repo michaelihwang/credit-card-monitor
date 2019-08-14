@@ -1,1 +1,1 @@
-# react-native-node-plaid-link
+# React Native and Node.js Plaid Link
