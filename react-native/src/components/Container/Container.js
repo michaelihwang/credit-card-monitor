@@ -1,13 +1,13 @@
 import React from "react";
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
 
 const Container = ({ children }) => (
-  <SafeAreaView style={styles.container}>
+  <View style={styles.container}>
     {children}
-  </SafeAreaView>
+  </View>
 );
 
 Container.propTypes = {
