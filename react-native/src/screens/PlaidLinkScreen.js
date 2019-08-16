@@ -6,10 +6,14 @@ import {
   TouchableHighlight,
   ScrollView
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { Container } from '../components/Container';
 import { PlaidWebView } from '../components/PlaidWebView';
+
+import { sendPublicToken } from '../actions/plaid.actions';
 
 const PUBLIC_KEY = '346c10c4f03aecdf08405e69833a5e';
 const API_ENV = 'sandbox';
@@ -132,4 +136,10 @@ const styles = EStyleSheet.create({
   }
 });
 
-export default ExampleScreen;
+const mapDispatchToProps = (dispatch) => (
+  bindActionCreators({
+    sendPublicToken,
+  }, dispatch)
+);
+
+export default connect(null, mapDispatchToProps)(ExampleScreen);
