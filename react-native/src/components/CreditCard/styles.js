@@ -30,19 +30,18 @@ export default EStyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginLeft: 5
+    marginBottom: 2.5,
   },
   endingWithText: {
     color: '$darkGray',
     fontSize: 16,
     textAlign: 'center',
-    marginRight: 5
   },
   balanceText: {
     color: '$plaidBlue',
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    marginLeft: 5
+    marginTop: 2.5,
   }
 });

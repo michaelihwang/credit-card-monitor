@@ -4,6 +4,8 @@ export const SEND_PUBLIC_TOKEN_BEGIN = 'SEND_PUBLIC_TOKEN_BEGIN';
 export const SEND_PUBLIC_TOKEN_SUCCESS = 'SEND_PUBLIC_TOKEN_SUCCESS';
 export const SEND_PUBLIC_TOKEN_FAIL = 'SEND_PUBLIC_TOKEN_FAIL';
 
+export const FETCH_LATEST_BALANCE = 'FETCH_LATEST_BALANCE'
+
 // Node.js Back-end
 const SERVER = 'http://localhost:8080';
 
@@ -26,4 +28,8 @@ export const sendPublicTokenSuccess = (data) => ({
 export const sendPublicTokenFail = (err) => ({
   type: SEND_PUBLIC_TOKEN_FAIL,
   payload: err
+});
+
+export const fetchLatestBalance  = () => ({
+  type: FETCH_LATEST_BALANCE
 });
