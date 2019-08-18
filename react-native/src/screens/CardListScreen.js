@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 //import moment from 'moment';
 import PropTypes from 'prop-types';
 
+import { Container } from '../components/Container';
 import { CreditCard } from '../components/CreditCard';
 
 import { fetchLatestBalance } from '../actions/plaid.actions';
@@ -108,7 +109,7 @@ class ListScreen extends Component {
     // const { data } = this.props;
     const { example } = this.state;
     return (
-      <View style={{ backgroundColor: 'white', flex: 1 }}>
+      <Container>
         <View style={{ flexGrow: 1, justifyContent: 'flex-start' }}>
           <FlatList
             data={example}
@@ -117,7 +118,7 @@ class ListScreen extends Component {
             ItemSeparatorComponent={this.renderSeparator}
           />
         </View>
-      </View>
+      </Container>
     );
   }
 }

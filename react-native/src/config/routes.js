@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 
 import CardListScreen from '../screens/CardListScreen';
-import PlaidLinkScreen from '../screens/PlaidLinkScreen';
+import LinkScreen from '../screens/LinkScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -14,8 +14,8 @@ const CardListStack = createStackNavigator({
   CardList: CardListScreen
 });
 
-const PlaidLinkStack = createStackNavigator({
-  Linker: PlaidLinkScreen
+const LinkStack = createStackNavigator({
+  Linker: LinkScreen
 });
 
 const TabNavigator = createBottomTabNavigator({
@@ -23,7 +23,7 @@ const TabNavigator = createBottomTabNavigator({
     screen: CardListStack
   },
   Linker: {
-    screen: PlaidLinkStack
+    screen: LinkStack
   }
 }, {
     defaultNavigationOptions: ({ navigation }) => ({

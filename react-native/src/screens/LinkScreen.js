@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {
+  Image,
   Modal,
   StatusBar,
   Text,
   TouchableHighlight,
-  ScrollView
+  ScrollView,
+  View
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,7 +22,7 @@ const API_ENV = 'sandbox';
 const API_PRODUCT = ['transactions'];
 const APP_NAME = 'Example Inc';
 
-class ExampleScreen extends Component {
+class LinkScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Home',
     headerBackTitle: null,
@@ -54,55 +56,44 @@ class ExampleScreen extends Component {
     });
   };
 
-  renderLogInPage = () => {
+  render() {
     const { showPlaidModal } = this.state;
     return (
       <Container>
-        <Modal
-          animationType={'slide'}
-          visible={showPlaidModal}
-          transparent={false}
-        >
-          <StatusBar barStyle='dark-content' />
-          <PlaidWebView
-            publicKey={PUBLIC_KEY}
-            env={API_ENV}
-            product={API_PRODUCT}
-            clientName={APP_NAME}
-            onMessage={this.onMessage}
+        <ScrollView contentContainerStyle={styles.pageContainer}>
+          <Modal
+            animationType={'slide'}
+            visible={showPlaidModal}
+            transparent={false}
+          >
+            <StatusBar barStyle='dark-content' />
+            <PlaidWebView
+              publicKey={PUBLIC_KEY}
+              env={API_ENV}
+              product={API_PRODUCT}
+              clientName={APP_NAME}
+              onMessage={this.onMessage}
+            />
+          </Modal>
+          <Image
+            source={{ uri: 'https://blog.plaid.com/content/images/2019/03/small-logo-text.png' }}
+            style={styles.logoContainer}
+            reSizeMode={'contain'}
           />
-        </Modal>
-        <TouchableHighlight
-          onPress={() => this.setState({ showPlaidModal: true })}
-          style={styles.buttonContainer}
-        >
-          <Text style={styles.buttonText}>Add Bank</Text>
-        </TouchableHighlight>
+          <View style={styles.bodyContainer}>
+            <Text style={styles.bodyText}>
+              Connect your Banks to monitor your Credit Card balances!
+            </Text>
+            <TouchableHighlight
+              onPress={() => this.setState({ showPlaidModal: true })}
+              style={styles.buttonContainer}
+            >
+              <Text style={styles.buttonText}>Add Bank</Text>
+            </TouchableHighlight>
+          </View>
+        </ScrollView>
       </Container>
     );
-  }
-
-  renderDataPage = () => (
-    <Container>
-      <ScrollView>
-        <Text>
-          {this.state.status}
-        </Text>
-        <Text>
-          {JSON.stringify(this.state.data)}
-        </Text>
-      </ScrollView>
-    </Container>
-  );
-
-  render() {
-    const { status } = this.state;
-    switch (status) {
-      case 'CONNECTED':
-        return this.renderDataPage();
-      default:
-        return this.renderLogInPage();
-    }
   }
 }
 
@@ -110,7 +101,17 @@ const styles = EStyleSheet.create({
   pageContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start'
+  },
+  logoContainer: {
+    flex: 1,
+    width: 256,
+    height: 256
+  },
+  bodyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   buttonContainer: {
     backgroundColor: '$plaidBlue',
@@ -118,16 +119,24 @@ const styles = EStyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     shadowColor: 'black',
-    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowOffset: {
+      width: 0.5,
+      height: 0.5
+    },
     shadowOpacity: 0.8,
     shadowRadius: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     marginBottom: 10,
     marginTop: 10,
     padding: 10,
     width: 200,
     height: 50
+  },
+  bodyText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'center',
+    marginBottom: 10
   },
   buttonText: {
     color: 'white',
@@ -142,4 +151,4 @@ const mapDispatchToProps = (dispatch) => (
   }, dispatch)
 );
 
-export default connect(null, mapDispatchToProps)(ExampleScreen);
+export default connect(null, mapDispatchToProps)(LinkScreen);
