@@ -3,12 +3,19 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import ExampleScreen from '../screens/ExampleScreen';
+// import CardListScreen from '../screens/CardListScreen';
+import PlaidLinkScreen from '../screens/PlaidLinkScreen';
 
-const HomeStack = createStackNavigator({
-  Home: ExampleScreen
+/*
+const CardListStack = createStackNavigator({
+  List: CardListScreen
+});
+*/
+
+const PlaidLinkStack = createStackNavigator({
+  Linker: PlaidLinkScreen
 });
 
-const AppContainer = createAppContainer(HomeStack);
+const AppContainer = createAppContainer(PlaidLinkStack);
 
 export default AppContainer;
