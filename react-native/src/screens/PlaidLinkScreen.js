@@ -24,7 +24,7 @@ class ExampleScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Home',
     headerBackTitle: null,
-    headerTitle: 'Plaid Link Example',
+    headerTitle: 'Plaid Link',
     headerTitleStyle: {
       color: 'black',
       fontSize: 24,
@@ -113,8 +113,8 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
   },
   buttonContainer: {
-    backgroundColor: '#3585E3',
-    borderColor: '#3585E3',
+    backgroundColor: '$plaidBlue',
+    borderColor: '$plaidBlue',
     borderRadius: 5,
     borderWidth: 1,
     shadowColor: 'black',
