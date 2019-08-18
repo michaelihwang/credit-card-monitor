@@ -9,26 +9,20 @@ import styles from './styles';
 
 class CreditCard extends Component {
   renderLeftBlock = () => {
-    const { cardName, endingWith } = this.props;
+    const { cardName, balance } = this.props;
     return (
       <View style={styles.leftBlock}>
-        <View style={styles.cardNameContainer}>
-          <Text style={styles.cardNameText}>{cardName}</Text>
-          <Text style={styles.endingWithText}>{endingWith}</Text>
-        </View>
+        <Text style={styles.cardNameText}>{cardName}</Text>
+        <Text style={styles.balanceText}>{balance}</Text>
       </View>
     );
   }
 
   renderRightBlock = () => {
-    const { current, limit } = this.props;
+    const { endingWith } = this.props;
     return (
       <View style={styles.rightBlock}>
-        <View style={styles.balanceContainer}>
-          <Text style={styles.balanceText}>{
-            `$${current.toLocaleString()} / $${limit.toLocaleString()}`
-          }</Text>
-        </View>
+        <Text style={styles.endingWithText}>{endingWith}</Text>
       </View>
     );
   }
@@ -46,8 +40,7 @@ class CreditCard extends Component {
 propTypes = {
   cardName: PropTypes.string,
   endingWith: PropTypes.string,
-  current: PropTypes.number,
-  limit: PropTypes.number
+  balance: PropTypes.string
 };
 
 export default CreditCard;
