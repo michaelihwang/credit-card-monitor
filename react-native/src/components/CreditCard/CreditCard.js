@@ -3,6 +3,7 @@ import {
   Text,
   View
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import styles from './styles';
 
@@ -20,11 +21,13 @@ class CreditCard extends Component {
   }
 
   renderRightBlock = () => {
-    const { balance } = this.props;
+    const { current, limit } = this.props;
     return (
       <View style={styles.rightBlock}>
         <View style={styles.balanceContainer}>
-          <Text style={styles.balanceText}>{balance}</Text>
+          <Text style={styles.balanceText}>{
+            `$${current.toLocaleString()} / $${limit.toLocaleString()}`
+          }</Text>
         </View>
       </View>
     );
@@ -39,5 +42,12 @@ class CreditCard extends Component {
     );
   }
 }
+
+propTypes = {
+  cardName: PropTypes.string,
+  endingWith: PropTypes.string,
+  current: PropTypes.number,
+  limit: PropTypes.number
+};
 
 export default CreditCard;
