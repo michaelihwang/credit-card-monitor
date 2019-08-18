@@ -9,16 +9,15 @@ export default EStyleSheet.create({
     paddingVertical: 5
   },
   leftBlock: {
-    flex: 1,
-    flexDirection: 'row'
+    flex: 7,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   rightBlock: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  cardNameContainer: {
-    flex: 1,
-    alignItems: 'flex-start',
+    flex: 3,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
     justifyContent: 'center',
   },
   balanceContainer: {
@@ -28,21 +27,21 @@ export default EStyleSheet.create({
   },
   cardNameText: {
     color: 'black',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginLeft: 10
+    marginBottom: 2.5,
   },
   endingWithText: {
     color: '$darkGray',
     fontSize: 16,
     textAlign: 'center',
-    marginLeft: 10
   },
   balanceText: {
-    color: 'black',
-    fontSize: 20,
+    color: '$plaidBlue',
+    fontSize: 16,
     fontWeight: '600',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 2.5,
   }
 });

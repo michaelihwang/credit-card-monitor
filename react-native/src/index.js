@@ -9,6 +9,7 @@ EStyleSheet.build({
   $lightGray: '#F2F3F7',
   $medGray: '#758496',
   $darkGray: '#343434',
+  $plaidBlue: '#3585E3'
 });
 
 export default () => (
