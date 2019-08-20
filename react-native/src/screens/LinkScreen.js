@@ -20,7 +20,7 @@ import { sendPublicToken } from '../actions/plaid.actions';
 const PUBLIC_KEY = '346c10c4f03aecdf08405e69833a5e';
 const API_ENV = 'sandbox';
 const API_PRODUCT = ['transactions'];
-const APP_NAME = 'Example Inc';
+const APP_NAME = 'Credit Card Monitor App';
 
 class LinkScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -36,24 +36,25 @@ class LinkScreen extends Component {
   });
 
   state = {
-    showPlaidModal: false,
-    status: '',
-    data: {}
+    showPlaidModal: false
   };
 
   onMessage = (data) => {
-    const { action, eventName } = data;
-    let connectionResponse = action.substr(action.lastIndexOf(':') + 1).toUpperCase();
-    if (eventName === 'EXIT' || connectionResponse === 'CONNECTED') {
+    const { action, eventName, metadata } = data;
+    let connectRes = action.substr(action.lastIndexOf(':') + 1).toUpperCase();
+    if (eventName === 'EXIT') {
       this.setState({
         showPlaidModal: false,
       });
-    }
+    } else if (connectRes === 'CONNECTED') {
+      const { public_token } = metadata;
+      this.setState({
+        showPlaidModal: false,
+      });
 
-    this.setState({
-      status: connectionResponse,
-      data
-    });
+      const { sendPublicToken } = this.props;
+      sendPublicToken(public_token);
+    }
   };
 
   render() {
