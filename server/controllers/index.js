@@ -9,8 +9,6 @@ const PLAID_ENV = process.env.PLAID_ENV;
 // We store the access_token in memory - in production, store it in a secure
 // persistent data store
 let ACCESS_TOKEN = 'null';
-let ITEM_ID = null;
-let ACCOUNTS = {};
 
 // Initialize the Plaid client
 const plaidClient = new plaid.Client(
@@ -31,7 +29,7 @@ const get_access_token = (req, res, next) => {
     if (err != null) {
       console.log('Could not exchange public_token:\n' + err);
       res.status = 500;
-      return res.json({
+      res.json({
         error: err
       });
     }
@@ -39,14 +37,11 @@ const get_access_token = (req, res, next) => {
     console.log('tokenResponse: ', tokenRes);
     const { access_token, item_id } = tokenRes;
 
-    ACCESS_TOKEN = access_token;
-    ITEM_ID = item_id;
-
     res.status = 200;
     res.json({
       access_token,
       item_id,
-      error: null,
+      error: false,
     });
   });
 }
@@ -59,7 +54,7 @@ const get_balance = (req, res, next) => {
     if (err != null) {
       console.log('Could not get balance:\n' + err);
       res.status = 500;
-      return res.json({
+      res.json({
         error: err
       });
     }
@@ -70,7 +65,7 @@ const get_balance = (req, res, next) => {
     res.status = 200;
     res.json({
       accounts,
-      error: null,
+      error: false,
     });
   });
 }
