@@ -23,7 +23,7 @@ const plaidClient = new plaid.Client(
 // an API access_token
 // https://plaid.com/docs/#exchange-token-flow
 const get_access_token = (req, res, next) => {
-  const PUBLIC_TOKEN = request.body.public_token;
+  const PUBLIC_TOKEN = req.body.public_token;
   plaidClient.exchangePublicToken(PUBLIC_TOKEN, (err, tokenRes) => {
     // handle error
     if (err != null) {
