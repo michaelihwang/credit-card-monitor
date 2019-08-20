@@ -18,6 +18,7 @@ const plaidReducer = (state = initialState, action) => {
       return {
         ...state,
         access_token: action.access_token,
+        accounts: action.accounts,
         item_id: action.item_id,
         error: action.error,
         isFetching: false,
@@ -26,6 +27,17 @@ const plaidReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
+        error: action.error
+      };
+    case FETCH_LATEST_BALANCE_SUCCESS:
+      return {
+        ...state,
+        accounts: action.accounts,
+        error: false
+      };
+    case FETCH_LATEST_BALANCE_FAIL:
+      return {
+        ...state,
         error: action.error
       };
     default:

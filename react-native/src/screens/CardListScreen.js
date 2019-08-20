@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   FlatList,
-  //RefreshControl,
+  RefreshControl,
   View
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-//import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { Container } from '../components/Container';
@@ -27,56 +27,15 @@ class ListScreen extends Component {
     }
   });
 
-  // example data for now
-  state = {
-    example: [
-      {
-        "account_id": "6Nxq63B1KDSe3lBxp7L1fnWbNGLV4nQxclVdL",
-        "balances": {
-          "available": null,
-          "current": 87.23,
-          "limit": 4000,
-          "iso_currency_code": "USD",
-          "unofficial_currency_code": null,
-        },
-        "mask": "9808",
-        "name": "Cash Rewards",
-        "official_name": "Bank of America Cash Rewards",
-        "subtype": "credit card",
-        "type": "credit"
-      },
-      {
-        "account_id": "6Myq63K1KDSe3lBwp7K1fnEbNGLV4nSxalVdW",
-        "balances": {
-          "available": null,
-          "current": 151.21,
-          "limit": null,
-          "iso_currency_code": "USD",
-          "unofficial_currency_code": null,
-        },
-        "mask": "3333",
-        "name": "Gold Card",
-        "official_name": "American Express Gold Card",
-        "subtype": "credit card",
-        "type": "credit"
-      },
-      {
-        "account_id": "8Nxv42B9KDSe5lBxp6L1fnWbNGLV1nQxclWdL",
-        "balances": {
-          "available": null,
-          "current": 101.15,
-          "limit": 15000,
-          "iso_currency_code": "USD",
-          "unofficial_currency_code": null,
-        },
-        "mask": "4606",
-        "name": "Sapphire Reserve",
-        "official_name": "Chase Sapphire Reserve",
-        "subtype": "credit card",
-        "type": "credit"
-      }
-    ]
-  };
+  handlePullToRefresh = () => {
+    const { access_token, fetchLatestBalance } = this.props;
+    console.log('------------------- access_token:', access_token);
+    (access_token !== 'null') ? fetchLatestBalance(access_token) : Alert.alert(
+      'public_token missing',
+      'Authenticate Plaid Link',
+      { cancelable: false },
+    );
+  }
 
   renderCreditCard = ({ item }) => {
     const { balances, mask, official_name } = item;
@@ -106,13 +65,18 @@ class ListScreen extends Component {
   _keyExtractor = (item, index) => index.toString();
 
   render() {
-    // const { data } = this.props;
-    const { example } = this.state;
+    const { isFetching, accounts } = this.props;
     return (
       <Container>
         <View style={{ flexGrow: 1, justifyContent: 'flex-start' }}>
           <FlatList
-            data={example}
+            data={accounts}
+            refreshControl={
+              <RefreshControl
+                refreshing={isFetching}
+                onRefresh={this.handlePullToRefresh}
+              />
+            }
             renderItem={this.renderCreditCard}
             keyExtractor={this._keyExtractor}
             ItemSeparatorComponent={this.renderSeparator}
@@ -126,13 +90,17 @@ class ListScreen extends Component {
 propTypes = {
   navigation: PropTypes.object,
   dispatch: PropTypes.func,
+  isFetching: PropTypes.bool,
+  access_token: PropTypes.string,
+  accounts: PropTypes.array,
 };
 
 const mapStateToProps = ({ plaidReducer }) => {
-  const { isFetching, data } = plaidReducer;
+  const { isFetching, access_token, accounts } = plaidReducer;
   return {
-    isFetching: isFetching,
-    data: data,
+    isFetching,
+    access_token,
+    accounts,
   };
 }
 

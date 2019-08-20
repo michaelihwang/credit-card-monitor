@@ -9,7 +9,7 @@ router.post('/get_access_token', get_access_token);
 
 // Retrieve real-time Balances for each of an Item's accounts
 // https://plaid.com/docs/#balance
-router.get('/balance', get_balance);
+router.post('/get_balance', get_balance);
 
 // route error handling
 router.use((req, res, next) => {

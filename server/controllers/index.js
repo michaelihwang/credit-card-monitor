@@ -6,10 +6,6 @@ const PLAID_SECRET = process.env.PLAID_SECRET;
 const PLAID_PUBLIC_KEY = process.env.PLAID_PUBLIC_KEY;
 const PLAID_ENV = process.env.PLAID_ENV;
 
-// We store the access_token in memory - in production, store it in a secure
-// persistent data store
-let ACCESS_TOKEN = 'null';
-
 // Initialize the Plaid client
 const plaidClient = new plaid.Client(
   PLAID_CLIENT_ID,
@@ -34,7 +30,7 @@ const get_access_token = (req, res, next) => {
       });
     }
 
-    console.log('tokenResponse: ', tokenRes);
+    console.log('tokenResponse:', tokenRes);
     const { access_token, item_id } = tokenRes;
 
     res.status = 200;
@@ -49,6 +45,7 @@ const get_access_token = (req, res, next) => {
 // Retrieve real-time Balances for each of an Item's accounts
 // https://plaid.com/docs/#balance
 const get_balance = (req, res, next) => {
+  const ACCESS_TOKEN = req.body.access_token;
   plaidClient.getBalance(ACCESS_TOKEN, (err, balanceRes) => {
     // handle error
     if (err != null) {
@@ -59,7 +56,7 @@ const get_balance = (req, res, next) => {
       });
     }
 
-    console.log('balanceResponse: ', balanceRes);
+    console.log('balanceResponse:', balanceRes);
     const { accounts } = balanceRes;
 
     res.status = 200;
