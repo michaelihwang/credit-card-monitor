@@ -27,9 +27,15 @@ class ListScreen extends Component {
     }
   });
 
+  componentDidUpdate(prevProps) {
+    const { access_token, fetchLatestBalance } = this.props;
+    if (access_token !== 'null' && prevProps.access_token === 'null') {
+      fetchLatestBalance(access_token);
+    }
+  }
+
   handlePullToRefresh = () => {
     const { access_token, fetchLatestBalance } = this.props;
-    console.log('------------------- access_token:', access_token);
     (access_token !== 'null') ? fetchLatestBalance(access_token) : Alert.alert(
       'public_token missing',
       'Authenticate Plaid Link',
@@ -38,19 +44,14 @@ class ListScreen extends Component {
   }
 
   renderCreditCard = ({ item }) => {
-    const { balances, mask, official_name } = item;
+    const { balances, mask, name } = item;
     const { current, limit } = balances;
-
-    const cardNameStr = official_name;
-    const endingWithStr = `(....${mask})`;
-    const balanceStr = (limit === null)
-      ? `$${current.toLocaleString()}`
-      : `$${current.toLocaleString()} / $${limit.toLocaleString()}`;
     return (
       <CreditCard
-        cardName={cardNameStr}
-        endingWith={endingWithStr}
-        balance={balanceStr}
+        name={name}
+        mask={mask}
+        current={current}
+        limit={limit}
       />
     );
   }
@@ -93,6 +94,7 @@ propTypes = {
   isFetching: PropTypes.bool,
   access_token: PropTypes.string,
   accounts: PropTypes.array,
+  fetchLatestBalance: PropTypes.func,
 };
 
 const mapStateToProps = ({ plaidReducer }) => {
