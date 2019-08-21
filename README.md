@@ -1,5 +1,5 @@
 # Credit Card Monitor App
-React Native with Redux App for .
+React Native with Redux App that consolidates all linked credit card balances in one place. The app uses Plaid's APIs to securely connect and fetch latest balances.
 
 ![](example.gif)
 
