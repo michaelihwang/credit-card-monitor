@@ -30,13 +30,21 @@ const plaidReducer = (state = initialState, action) => {
       };
     case FETCH_LATEST_BALANCE_SUCCESS:
       // filter out non-credit cards
-      const accounts = action.accounts.filter(
-        item => item.subtype === 'credit card'
-      )
+      const newAccounts = action.accounts.filter(
+        (item) => item.subtype === 'credit card'
+      );
+
+      // updates old accounts with new data
+      const prevAccounts = state.accounts.filter(
+        (oldItem) => !newAccounts.some(
+          (newItem) => newItem.account_id === oldItem.account_id
+        )
+      );
+
       return {
         ...state,
         isFetching: false,
-        accounts,
+        accounts: prevAccounts.concat(newAccounts),
         error: false
       };
     case FETCH_LATEST_BALANCE_FAIL:
