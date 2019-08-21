@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { Container } from '../components/Container';
@@ -145,6 +146,12 @@ const styles = EStyleSheet.create({
     textAlign: 'center'
   }
 });
+
+propTypes = {
+  navigation: PropTypes.object,
+  dispatch: PropTypes.func,
+  sendPublicToken: PropTypes.func,
+};
 
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
