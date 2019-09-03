@@ -5,8 +5,8 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import CardListScreen from '../screens/CardListScreen';
-import LinkScreen from '../screens/LinkScreen';
+import { CardListScreen } from '../screens/CardListScreen';
+import { LinkScreen } from '../screens/LinkScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 

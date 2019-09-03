@@ -9,10 +9,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Container } from '../components/Container';
-import { CreditCard } from '../components/CreditCard';
+import { Container } from '../../components/Container';
+import { CreditCard } from '../../components/CreditCard';
 
-import { fetchLatestBalance } from '../actions/plaid.actions';
+import { fetchLatestBalance } from '../../actions/plaid.actions';
+
+import styles from './styles';
 
 class ListScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -57,8 +59,8 @@ class ListScreen extends Component {
   }
 
   renderSeparator = () => (
-    <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-      <View style={{ backgroundColor: '#758496', height: 1 }} />
+    <View style={{ paddingHorizontal: 10 }}>
+      <View style={styles.separator} />
     </View>
   );
 
@@ -69,7 +71,7 @@ class ListScreen extends Component {
     const { isFetching, accounts } = this.props;
     return (
       <Container>
-        <View style={{ flexGrow: 1, justifyContent: 'flex-start' }}>
+        <View style={styles.listContainer}>
           <FlatList
             data={accounts}
             refreshControl={
