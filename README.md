@@ -41,9 +41,40 @@ This app uses `Plaid Link` to get a `public_token`, which is then exchanged for 
 
 ### Developer Account
 
-### API Endpoints
-
 ### API Response
+The following is the /balance response payload format. All endpoints return JSON format.
+
+```
+POST /api/get_balance 200 708.644 ms - 2381
+balanceResponse: { accounts:
+   [ { account_id: '8Xeq8Zn46MtP5KQRnNLGFNkq4XpDNQFwoyRyn',
+       balances: [Object],
+       mask: '3333',
+       name: 'Plaid Credit Card',
+       official_name: 'Plaid Diamond 12.5% APR Interest Credit Card',
+       subtype: 'credit card',
+       type: 'credit' },
+     ... ],
+  item:
+   { available_products:
+      [ 'assets',
+        'auth',
+        'balance',
+        'credit_details',
+        'identity',
+        'income',
+        'investments',
+        'liabilities' ],
+     billed_products: [ 'transactions' ],
+     error: null,
+     institution_id: 'ins_3',
+     item_id: '4mNGgZEw67uAKRJx9XdNUyb59zVXDofdb3LnJ',
+     webhook: '' },
+  request_id: 'QuHn6e4sQKuBC7a',
+  status_code: 200 }
+```
+
+Take a look at their [Documentation](https://plaid.com/docs/#balance) for more information.
 
 ## License
 MIT License Copyright © 2019 Michael Hwang
