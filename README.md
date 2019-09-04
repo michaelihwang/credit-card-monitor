@@ -42,7 +42,7 @@ This app uses `Plaid Link` to get a `public_token`, which is then exchanged for 
 ### Developer Account
 
 ### API Response
-The following is the /balance response payload format. All endpoints return JSON format.
+The following is the `/balance` response payload format. All endpoints return JSON format.
 
 ```
 POST /api/get_balance 200 708.644 ms - 2381
