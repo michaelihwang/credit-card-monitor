@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React Native Plaid Link",
-    "slug": "react-native-plaid-link",
+    "name": "Credit Card Monitor",
+    "slug": "credit-card-monitor",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": [
